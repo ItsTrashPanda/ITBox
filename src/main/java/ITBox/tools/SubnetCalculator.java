@@ -34,10 +34,45 @@ public class SubnetCalculator {
         String firstHostAddress;
         String lastHostAddress;
         String broadcastAddress;
+        String subnetMask;
         switch (sClass) {
             case 'A':
                 break;
             case 'B':
+                //Setting the first twos segments as they will either never change or start at a non-0 number
+                s1Seg = 172;
+                s2Seg = 16;
+                //"all that jazz" -adam
+                for(int i:sHosts) {
+                    //Returns error value of -1 (Subnet Size too large)
+                    if(i+2 > 256) {
+                        return(-1);
+                    }
+                    //Rounding up to the nearest square of two
+                    int j = 0;
+                    while(i+2 <= nearest[j]) {
+                        j++;
+                    }
+                    //Converting the int segments into a whole dot separated address
+                    networkAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
+                    hostSeg += 1;
+                    firstHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
+                    hostSeg += nearest[j] - 2;
+                    lastHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
+                    hostSeg += 1;
+                    broadcastAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
+                    //Checking if the Host Segment is full and setting the s3Seg to the next one and resetting hostSeg
+                    if(hostSeg == 255) {
+                        s3Seg += 1;
+                        hostSeg = 0;
+                    }
+                    //Setting subnet
+
+                    ipRanges[i][0] = networkAddress;
+                    ipRanges[i][1] = firstHostAddress;
+                    ipRanges[i][2] = lastHostAddress;
+                    ipRanges[i][3] = broadcastAddress;
+                }
                 break;
             case 'C':
                 //Setting the first two segments as they will never change in class C
