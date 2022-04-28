@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SubnetCalculator {
     private char sClass;
     private ArrayList<Integer> sHosts;
-    private ArrayList<String> ipRanges;
+    private String[][] ipRanges;
 
     private boolean classful = false;
 
@@ -67,10 +67,10 @@ public class SubnetCalculator {
                         s3Seg += 1;
                         hostSeg = 0;
                     }
-                    ipRanges.add("Network Address: "+networkAddress+"\n"+
-                                 "First Host Address: "+firstHostAddress+"\n"+
-                                 "Last Host Address: "+lastHostAddress+"\n"+
-                                 "Broadcast Address: "+broadcastAddress+"\n");
+                    ipRanges[i][0] = networkAddress;
+                    ipRanges[i][1] = firstHostAddress;
+                    ipRanges[i][2] = lastHostAddress;
+                    ipRanges[i][3] = broadcastAddress;
                 }
                 break;
         }
@@ -94,5 +94,9 @@ public class SubnetCalculator {
 
     public void setRequiredHosts(ArrayList<Integer> sHosts) {
         this.sHosts = sHosts;
+    }
+
+    public String[][] getIpRanges() {
+        return ipRanges;
     }
 }
