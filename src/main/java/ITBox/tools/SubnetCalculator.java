@@ -59,7 +59,15 @@ public class SubnetCalculator {
                     firstHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
                     hostSeg += nearest[j] - 2;
                     if(hostSeg >= 255) {
-                        hostSeg = hostSeg+1/2;
+                        s3Seg = (int)(hostSeg+1/256);
+                        hostSeg = ((hostSeg+1/256)-1-s3Seg)*256;
+                        if(s3Seg >= 255) {
+                            s2Seg = (int)(s3Seg+1/256);
+                            s3Seg = ((s3Seg+1/256)-1-s2Seg)*256;
+                            if(s2Seg >= 32) {
+                                return -1;
+                            }
+                        }
                     }
                     lastHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
                     hostSeg += 1;
@@ -77,6 +85,7 @@ public class SubnetCalculator {
                     ipRanges[i][1] = firstHostAddress;
                     ipRanges[i][2] = lastHostAddress;
                     ipRanges[i][3] = broadcastAddress;
+                    //ipRanges[i][4] = subnetMask;
                 }
                 break;
             case 'C':
@@ -113,6 +122,7 @@ public class SubnetCalculator {
                     ipRanges[i][1] = firstHostAddress;
                     ipRanges[i][2] = lastHostAddress;
                     ipRanges[i][3] = broadcastAddress;
+                    //ipRanges[i][4] = subnetMask;
                 }
                 break;
         }
