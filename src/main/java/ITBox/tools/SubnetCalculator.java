@@ -45,7 +45,7 @@ public class SubnetCalculator {
                 //"all that jazz" -adam
                 for(int i:sHosts) {
                     //Returns error value of -1 (Subnet Size too large)
-                    if(i+2 > 256) {
+                    if(i+2 > 65536) {
                         return(-1);
                     }
                     //Rounding up to the nearest square of two
@@ -58,6 +58,9 @@ public class SubnetCalculator {
                     hostSeg += 1;
                     firstHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
                     hostSeg += nearest[j] - 2;
+                    if(hostSeg >= 255) {
+                        hostSeg = hostSeg+1/2;
+                    }
                     lastHostAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
                     hostSeg += 1;
                     broadcastAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
@@ -65,6 +68,8 @@ public class SubnetCalculator {
                     if(hostSeg == 255) {
                         s3Seg += 1;
                         hostSeg = 0;
+                    } else {
+                        hostSeg += 1;
                     }
                     //Setting subnet
 
@@ -101,6 +106,8 @@ public class SubnetCalculator {
                     if(hostSeg == 255) {
                         s3Seg += 1;
                         hostSeg = 0;
+                    } else {
+                        hostSeg += 1;
                     }
                     ipRanges[i][0] = networkAddress;
                     ipRanges[i][1] = firstHostAddress;
