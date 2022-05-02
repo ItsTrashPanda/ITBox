@@ -1,13 +1,14 @@
 package ITBox.application;
 import ITBox.tools.*;
 
-
-//GUI method below
 public class GUI {
-    // Var for number of hosts
-    int numHosts;
+    public int numHosts;
+    public String ClassType;
 
-    public GUI(int initHosts) {
+
+    GUI(int initHosts, String initClassT){
         numHosts = initHosts;
+        ClassType = initClassT;
     }
+
 }
