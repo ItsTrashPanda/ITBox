@@ -3,7 +3,6 @@ package ITBox.application;
 import ITBox.tools.SubnetCalculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
