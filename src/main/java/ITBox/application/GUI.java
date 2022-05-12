@@ -21,24 +21,40 @@ public class GUI extends JFrame{
 
 
     GUI(int initHosts, String initClassT){
-        numHosts = initHosts;
-        ClassType = initClassT;
+        //numHosts = initHosts;
+        //ClassType = initClassT;
         StartCalc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(StartCalc, ClassTypeField.getText()+" Numbers");
             }
         });
+
+    }
+    public String getNetwork() {
+        return NetworkField.getText();
+    }
+    public String getLast() {
+        return LastUseField.getText();
+    }
+    public String getFirst() {
+        return FirstUseField.getText();
+    }
+    public String getBroadcast() {
+        return BroadcastField.getText();
+    }
+    public String getClassType() {
+        return ClassTypeField.getText();
     }
 
     public static void main(String[] args){
-        GUI g=new GUI(3, "test");
+        JFrame g = new JFrame("Subnet calc");
+        g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        g.setSize(1920,1080);
+        g.setLocationRelativeTo(null);
+        //g.setContentPane(new mainPanel);
+        JButton button1 = new JButton("Press");
         g.setVisible(true);
-        g.setSize(300,400);
-        g.setContentPane(g.mainPanel);
-        g.setTitle("Menu");
-
-
     }
 
 
