@@ -64,7 +64,6 @@ public class SubnetCalculator {
                     }
                     j++;
                     //hehe
-                    //christmas
                     //Converting the int segments into a whole dot separated address
                     networkAddress = s1Seg + "." + s2Seg + "." + s3Seg + "." + hostSeg;
                     hostSeg += 1;

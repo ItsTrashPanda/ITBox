@@ -54,12 +54,6 @@ public class GUI extends JFrame{
     }
 
     public void setOutput(String output) {
-        /*if (!outputField.getText().equals("")) {
-            outputField.selectAll();
-            outputField.replaceSelection("");
-        }
-
-         */
         outputField.setText(output);
     }
 
