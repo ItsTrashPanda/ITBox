@@ -1,9 +1,9 @@
-package tools;
+package main.java.tools;
 
 import java.util.ArrayList;
 
 public class SubnetCalculator {
-    private String sClass;
+    private int sClass;
     private ArrayList<Integer> sHosts;
     private String[][] ipRanges;
 
@@ -25,9 +25,13 @@ public class SubnetCalculator {
      *  @param  initClass The Network Class of choice in the form of a char, Must be CAPITALIZED.
      * @param  initHosts An ArrayList filled with the required number of Hosts in each subnet.
      */
-    public SubnetCalculator(String initClass, ArrayList<Integer> initHosts) {
+    public SubnetCalculator(int initClass, ArrayList<Integer> initHosts) {
         sClass = initClass;
         sHosts = initHosts;
+    }
+
+    public SubnetCalculator() {
+        sClass = 0;
     }
 
     public int calculate() {
@@ -43,7 +47,7 @@ public class SubnetCalculator {
         String subnetMask;
         ipRanges = new String[sHosts.size()][5];
         switch (sClass) {
-            case "A":
+            case 0:
                 //Setting the first twos segments as they will either never change or start at a non-0 number
                 s1Seg = 10;
                 s2Seg = 0;
@@ -103,7 +107,7 @@ public class SubnetCalculator {
                     ii++;
                 }
                 break;
-            case "B":
+            case 1:
                 //Setting the first twos segments as they will either never change or start at a non-0 number
                 s1Seg = 172;
                 s2Seg = 16;
@@ -160,7 +164,7 @@ public class SubnetCalculator {
                     ii++;
                 }
                 break;
-            case "C":
+            case 2:
                 //Setting the first two segments as they will never change in class C
                 s1Seg = 192;
                 s2Seg = 168;
@@ -203,11 +207,11 @@ public class SubnetCalculator {
         return 0;
     }
 
-    public String getSubnetClass(){
+    public int getSubnetClass(){
         return sClass;
     }
 
-    public void setSubnetClass(String sClass) {
+    public void setSubnetClass(int sClass) {
         this.sClass = sClass;
     }
 

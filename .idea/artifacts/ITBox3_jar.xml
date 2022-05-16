@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ITBox3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ITBox3_jar</output-path>
+    <root id="archive" name="ITBox3.jar">
+      <element id="module-output" name="ITBox3" />
+    </root>
+  </artifact>
+</component>

@@ -1,42 +1,37 @@
-package application;
+package main.java.application;
 
-import tools.SubnetCalculator;
+import main.java.application.GUI;
+import main.java.tools.SubnetCalculator;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        String sClass = "";
-        String input = "";
-        ArrayList<String> list = new ArrayList<String>();
-        ArrayList<Integer> intList = new ArrayList<Integer>();
-        Scanner scanner = new Scanner(System.in);
-        SubnetCalculator calc;
+        SubnetCalculator Calc = new SubnetCalculator();
+        GUI gui = new GUI();
 
-        System.out.println("Please enter a Subnet Class");
-        sClass = scanner.nextLine();
-        System.out.println("Please enter a host size or an x");
-        while (!input.equals("x")) {
-            input = scanner.nextLine();
-            if (!input.equals("x")) {
-                list.add(input);
+        gui.initializeGUI();
+        while(true) {
+            Calc.setSubnetClass(gui.getClassType());
+            if (gui.isPressed()) {
+                ArrayList<Integer> sHosts = new ArrayList<>();
+                Calc.setRequiredHosts(sHosts);
+                String[] temp = gui.getInput().split("\n");
+                for (String i:temp) {
+                    sHosts.add(Integer.parseInt(i.replaceAll("\n", "")));
+                }
+                Calc.calculate();
+                String output = "";
+                int j = 0;
+                for(String[] i: Calc.getIpRanges()) {
+                    j++;
+                    output = output + "Subnet " + j + "\n" + "Network Address: " + i[0] + "\n" + "First Host Address: " + i[1]
+                            + "\n" + "Last Host Address: " + i[2] + "\n" + "Broadcast Address: " + i[3] + "\n" + "Subnet Mask: " + i[4] + "\n\n";
+                }
+                gui.setOutput(output);
+                gui.setPressed(false);
             }
-        }
-        for(String s:list) {
-            intList.add(Integer.parseInt(s));
-        }
-        calc = new SubnetCalculator(sClass, intList);
-        calc.calculate();
-        int j = 0;
-        for(String[] i: calc.getIpRanges()) {
-            j++;
-            System.out.println("Subnet " + j);
-            System.out.println("Network Address: " + i[0]);
-            System.out.println("First Host Address: " + i[1]);
-            System.out.println("Last Host Address: " + i[2]);
-            System.out.println("Broadcast Address: " + i[3]);
-            System.out.println("Subnet Mask: " + i[4]);
         }
     }
 }
