@@ -6,4 +6,4 @@ and to hopefully help pay for our college
 
 We thank you for your support and hope you enjoy our app
 
--Jackson,Adam
+-Jackson,Adam (no levi)
